@@ -15,7 +15,7 @@ For the `accounts` vertical slice we use a Hygraph-style structure:
 
 ```graphql
 scalar DateTime
-
+```
 """
 All top-level entities implement Node.
 """
