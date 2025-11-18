@@ -68,7 +68,17 @@ type AccountConnection {
 
 
 ## 2. QueryRoot.accounts
-(… same as provided in chat …)
+
+A typical root query field looks like this:
+
+type Query {
+  accounts(
+    where: AccountWhereInput
+    orderBy: [AccountOrderByInput!]
+    first: Int
+    after: String
+  ): AccountConnection!
+}
 
 ## 3. Input Mapping (Where / OrderBy)
 (… same as provided in chat …)
