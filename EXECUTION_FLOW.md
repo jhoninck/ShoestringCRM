@@ -15,6 +15,8 @@ query {
   }
 }
 
+```
+
 moves through the ShoestringCRM stack—from the resolver, through RBAC,
 to the ORM, to SQL, and back into a GraphQL response.
 
