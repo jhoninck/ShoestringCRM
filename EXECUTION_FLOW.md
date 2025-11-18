@@ -17,7 +17,8 @@ query {
 
 moves through the ShoestringCRM stack—from the resolver, through RBAC,
 to the ORM, to SQL, and back into a GraphQL response.
-4.1 Overview Pipeline
+
+### Overview Pipeline
 
 GraphQL Request
      ↓
