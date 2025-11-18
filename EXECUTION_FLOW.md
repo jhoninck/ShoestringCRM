@@ -1,4 +1,4 @@
-## 4. Execution Flow
+## Execution Flow
 
 This section describes how a GraphQL query like:
 
