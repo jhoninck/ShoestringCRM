@@ -22,6 +22,8 @@ to the ORM, to SQL, and back into a GraphQL response.
 
 ### Overview Pipeline
 
+
+```
 GraphQL Request
      ↓
 GraphQL Resolver (QueryRoot)
@@ -39,10 +41,14 @@ PostgreSQL
 Rows → Model instances
      ↓
 Connection / Edges → GraphQL Response
+```
 
 Every entity (Account, Lead, Opportunity, etc.) follows the same pattern.
-4.2 Step-by-step Breakdown
-Step 1 — GraphQL Resolver
+
+
+### Step-by-step Breakdown
+
+#### Step 1 — GraphQL Resolver
 
 The resolver receives four parameters:
 
