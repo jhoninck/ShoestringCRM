@@ -16,18 +16,21 @@ For the `accounts` vertical slice we use a Hygraph-style structure:
 ```graphql
 scalar DateTime
 ```
-"""
+
 All top-level entities implement Node.
-"""
+
+```
 interface Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
+```
 
-"""
+
 CRM Account entity.
-"""
+
+```
 type Account implements Node {
   id: ID!
   createdAt: DateTime!
@@ -39,38 +42,40 @@ type Account implements Node {
   website: String
   phone: String
 }
+```
 
-"""
 Relay-style pagination metadata.
-"""
+
+```
 type PageInfo {
   hasNextPage: Boolean!
   hasPreviousPage: Boolean!
   startCursor: String
   endCursor: String
 }
+```
 
-"""
 Edge wrapper for Account in a connection.
-"""
+```
 type AccountEdge {
   cursor: String!
   node: Account!
 }
 
-"""
+```
 Connection wrapper for paginated Account lists.
-"""
+```
 type AccountConnection {
   pageInfo: PageInfo!
   edges: [AccountEdge!]!
 }
-
+```
 
 ## 2. QueryRoot.accounts
 
 A typical root query field looks like this:
 
+```
 type Query {
   accounts(
     where: AccountWhereInput
@@ -79,6 +84,7 @@ type Query {
     after: String
   ): AccountConnection!
 }
+```
 
 ## 3. Input Mapping (Where / OrderBy)
 
@@ -92,32 +98,34 @@ The process always follows the same pattern:
 
 This makes all models behave uniformly without handwritten SQL.
 
----
+
 
 ### 3.1 GraphQL Input Objects
 
 ```graphql
-"""
+```
 String filter using GraphQL conventions similar to Hygraph.
-"""
+```
 input StringFilter {
   equals: String
   contains: String
   starts_with: String
   ends_with: String
 }
+```
 
-"""
 Filter object for accounts.
-"""
+
+```
 input AccountWhereInput {
   name: StringFilter
   industry: StringFilter
 }
+```
 
-"""
 Sorting for accounts.
-"""
+
+```
 enum AccountOrderField {
   name
   createdAt
@@ -133,6 +141,7 @@ enum SortDirection {
   asc
   desc
 }
+```
 
 ## 4. Execution Flow
 
