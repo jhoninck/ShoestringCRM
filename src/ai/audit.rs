@@ -21,3 +21,9 @@ impl AuditLogger {
         );
     }
 }
+
+
+## TODO
+#NATS
+#audit DB table
+#SIEM
