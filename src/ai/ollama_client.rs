@@ -1,3 +1,12 @@
+/*
+HTTP client for communicating with the local or remote Ollama runtime.
+
+Responsibilities:
+- send prompt requests
+- deserialize responses
+- centralize model/runtime configuration
+- handle transport-level errors
+*/
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone)]
