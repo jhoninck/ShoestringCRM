@@ -1,3 +1,11 @@
+/*
+Prompt and context sanitization layer.
+
+Responsibilities:
+    - minimize data before model invocation
+    - mask or redact sensitive content
+    - prepare model-safe text representation
+*/
 pub struct Redactor {}
 
 impl Redactor {
