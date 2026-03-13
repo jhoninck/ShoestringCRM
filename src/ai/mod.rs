@@ -1,3 +1,4 @@
+// Deckares the AI submodules
 pub mod service;
 pub mod ollama_client;
 pub mod policy;
