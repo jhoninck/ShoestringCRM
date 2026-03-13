@@ -1,3 +1,13 @@
+/*
+Authorization and AI capability checks.
+
+Responsibilities:
+    - validate whether user may access AI
+    - validate tenant presence
+    - validate allowed AI actions
+    - later integrate with more advanced policy logic if needed
+
+*/
 pub struct AiPolicy {}
 
 impl AiPolicy {
