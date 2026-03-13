@@ -23,3 +23,9 @@ impl AiPolicy {
         Ok(())
     }
 }
+// ToDO
+// Later to be extended to check:
+// role
+// tenant boundary
+// tool permissions
+// data access scopes
