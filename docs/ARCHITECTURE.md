@@ -11,6 +11,7 @@ Clients authenticate through **ZITADEL** and interact with the system via the **
 
 - **ZITADEL**  
   Identity provider (OIDC) for authentication and RBAC.
+  If required this can easily be modified to another identity provider, which uses OIDC
 
 - **Rust GraphQL API**  
   Central entry point for clients and integrations.
