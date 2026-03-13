@@ -1,3 +1,15 @@
+/*
+Main orchestration layer for AI requests.
+
+Responsibilities:
+- receive AI request from application layer
+- invoke policy checks
+- invoke redaction/minimization
+- call the Ollama client
+- invoke audit logging
+- return safe response
+*/
+
 use crate::ai::ollama_client::OllamaClient;
 use crate::ai::policy::AiPolicy;
 use crate::ai::redaction::Redactor;
