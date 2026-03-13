@@ -2,7 +2,7 @@
 
 ## Onboarding Architecture
 
-![Onboarding Diagram](images/onboarding-diagram.png)
+![Onboarding Diagram](images/AI-CRM-Platform.png)
 
 ## Social Funnel
 
