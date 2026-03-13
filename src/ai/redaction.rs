@@ -16,10 +16,6 @@ impl Redactor {
     }
 }
 ## ToDO
-# 
-
-regex PII
-
-field masking
-
-full Microsoft Presidio
+#  regex PII
+#  field masking
+#  full Microsoft Presidio
