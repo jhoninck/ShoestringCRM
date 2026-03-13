@@ -1,0 +1,107 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="CRM Architecture v3">
+    <mxGraphModel dx="1420" dy="827" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Zitadel -->
+        <mxCell id="zitadel" value="Zitadel" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;" vertex="1" parent="1">
+          <mxGeometry x="60" y="60" width="160" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Flutter -->
+        <mxCell id="flutter" value="Flutter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;" vertex="1" parent="1">
+          <mxGeometry x="60" y="160" width="160" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Rust GraphQL -->
+        <mxCell id="graphql" value="Rust GraphQL API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" vertex="1" parent="1">
+          <mxGeometry x="340" y="60" width="220" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Domain Models -->
+        <mxCell id="domain" value="Domain Models" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="1">
+          <mxGeometry x="340" y="140" width="220" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- PostgreSQL -->
+        <mxCell id="postgres" value="PostgreSQL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="1">
+          <mxGeometry x="340" y="220" width="220" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Hygraph -->
+        <mxCell id="hygraph" value="Hygraph / CMS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;" vertex="1" parent="1">
+          <mxGeometry x="680" y="60" width="200" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Mail -->
+        <mxCell id="mail" value="Mail&#xa;IMAP / SMTP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" vertex="1" parent="1">
+          <mxGeometry x="680" y="160" width="200" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- VoIP -->
+        <mxCell id="voip" value="VoIP&#xa;SIP / WebRTC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" vertex="1" parent="1">
+          <mxGeometry x="680" y="240" width="200" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Social -->
+        <mxCell id="social" value="Social Channels&#xa;• Social Post&#xa;• Social Comment&#xa;• Social Message" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;" vertex="1" parent="1">
+          <mxGeometry x="680" y="340" width="200" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- AI -->
+        <mxCell id="ai" value="AI Assistant&#xa;Ollama / Guardrails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" vertex="1" parent="1">
+          <mxGeometry x="680" y="470" width="200" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- CRM Funnel -->
+        <mxCell id="crm" value="CRM Funnel&#xa;Customers → Opportunities → Sales" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;" vertex="1" parent="1">
+          <mxGeometry x="340" y="420" width="220" height="90" as="geometry"/>
+        </mxCell>
+
+        <!-- Edges -->
+        <mxCell id="e1" style="endArrow=block;" edge="1" parent="1" source="zitadel" target="graphql">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e2" style="endArrow=block;" edge="1" parent="1" source="flutter" target="graphql">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e3" style="endArrow=block;" edge="1" parent="1" source="graphql" target="domain">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e4" style="endArrow=block;" edge="1" parent="1" source="domain" target="postgres">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e5" style="endArrow=block;" edge="1" parent="1" source="graphql" target="hygraph">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e6" style="endArrow=block;" edge="1" parent="1" source="postgres" target="mail">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e7" style="endArrow=block;" edge="1" parent="1" source="postgres" target="voip">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e8" style="endArrow=block;" edge="1" parent="1" source="postgres" target="social">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e9" style="endArrow=block;" edge="1" parent="1" source="social" target="ai">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e10" style="endArrow=block;" edge="1" parent="1" source="ai" target="crm">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
