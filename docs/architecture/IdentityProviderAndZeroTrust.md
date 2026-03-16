@@ -1,58 +1,143 @@
-# Role of an OIDC Identity Provider (e.g., ZITADEL) in a Zero Trust Architecture
+# OIDC Provider (ZITADEL) in a Zero Trust Architecture
 
 ## Purpose
-
-This document explains the role of an **OIDC Identity Provider (IdP)** such as **ZITADEL** in a **Zero Trust architecture**, and how it enables secure access to systems like:
-
-- GraphQL APIs
-- CRM systems
-- CMS platforms
-- PostgreSQL databases
-- MinIO object storage
-- NATS messaging
-- Redis caching layers
-
-In Zero Trust, the Identity Provider becomes the **root of trust** for both **human users** and **machine workloads**.
+An OIDC identity provider (e.g., ZITADEL) is the **root identity authority** in a Zero Trust system.  
+It authenticates users and services, issues **signed identity tokens**, and allows every component to verify identity before granting access.
 
 ---
 
-# Zero Trust Principle: Identity is the New Perimeter
+## Core Zero Trust Role
 
-Traditional security relied on network boundaries:
+| Responsibility | Description |
+|---|---|
+| Authentication | Verifies users or services (SSO, MFA, passkeys, service credentials). |
+| Token Issuance | Issues signed JWT access tokens containing identity and permissions. |
+| Identity Claims | Provides roles, scopes, tenant IDs, and other authorization context. |
+| Trust Anchor | All services trust tokens issued by the IdP rather than network location. |
 
-- internal network = trusted
-- external network = untrusted
+Example token:
 
-Zero Trust replaces this with **identity-based trust**.
-
-Every access decision must answer:
-
-- **Who is making the request?**
-- **What are they allowed to do?**
-- **Which resource are they trying to access?**
-- **Under what conditions?**
-
-OIDC providers like **ZITADEL** provide the **identity verification layer** required for this model.
-
----
-
-# What an OIDC Provider Does
-
-An **OIDC (OpenID Connect) Identity Provider** is responsible for:
-
-1. Authenticating users or services
-2. Issuing cryptographically signed identity tokens
-3. Providing identity claims and permissions
-4. Enabling services to verify identity without direct trust
-
-Typical providers include:
-
-- ZITADEL
-- Keycloak
-- Auth0
-- Azure AD
-- Okta
+```json
+{
+  "sub": "user-123",
+  "tenant": "tenant-a",
+  "roles": ["sales"],
+  "scope": ["crm.read"],
+  "aud": "graphql-api"
+}
+```
 
 ---
 
-# High-Level Architecture
+## Position in the Architecture
+
+```
+Client
+   │
+   ▼
+OIDC Provider (ZITADEL)
+   │
+   ▼
+GraphQL API / Gateway
+   │
+   ├── CRM
+   ├── CMS
+   ├── PostgreSQL
+   ├── MinIO
+   ├── NATS
+   └── Redis
+```
+
+Flow:
+
+1. Client authenticates with the OIDC provider.
+2. The provider issues a **signed access token**.
+3. The client calls the API with the token.
+4. The API verifies the token before accessing backend services.
+
+---
+
+## Integration With GraphQL
+
+GraphQL acts as the **application access boundary**.
+
+Responsibilities:
+
+- validate the JWT issued by the OIDC provider
+- enforce query / mutation authorization
+- extract identity claims
+- forward identity context to backend services
+
+Example request header:
+
+```
+Authorization: Bearer <JWT>
+```
+
+Identity context forwarded internally:
+
+```
+x-user-id
+x-tenant-id
+x-roles
+```
+
+---
+
+## Service-to-Service Identity
+
+OIDC providers also issue tokens for **machine workloads**.
+
+Example flow:
+
+```
+Service A → request token from IdP
+Service A → call Service B with token
+Service B → verify token
+```
+
+This removes trust based on **network location**.
+
+---
+
+## Authorization Model
+
+Applications use token claims to enforce policy.
+
+Typical claims:
+
+- roles
+- scopes
+- tenant ID
+- group membership
+
+Example rule:
+
+```
+role: sales  → read CRM contacts
+role: finance → read invoices
+role: editor → modify CMS content
+```
+
+---
+
+## Why This Enables Zero Trust
+
+| Problem | Solution |
+|---|---|
+| Network trust | Identity-based verification |
+| Shared credentials | Signed tokens per user/service |
+| Long-lived sessions | Short-lived access tokens |
+| Lateral movement | Independent token validation by every service |
+
+---
+
+## Key Takeaway
+
+In a Zero Trust system:
+
+- **ZITADEL (OIDC)** = identity authority  
+- **GraphQL/API** = policy enforcement boundary  
+- **Services & databases** = independently verify identity and enforce permissions  
+
+Security decisions are based on **verified identity and explicit policy**, not on network trust.
