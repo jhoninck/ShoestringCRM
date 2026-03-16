@@ -11,6 +11,7 @@
 | Moderation / Trust & Safety | ✅ | ✅ | ✅ | ✅ | PostgreSQL for cases/policies. MinIO for evidence. NATS for moderation events. Redis for policy cache. |
 
 Legend:
+
 ✅ = primary dependency  
 ⚪ = optional dependency  
 ❌ = generally not recommended
