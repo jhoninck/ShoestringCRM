@@ -1,7 +1,3 @@
-
-If GitHub still renders it too vertically, use this safer version with no `direction LR` inside subgraphs:
-
-```md
 ```mermaid
 flowchart TB
 
