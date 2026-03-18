@@ -7,7 +7,7 @@ This document explains how **GraphQL fits into a Zero Trust architecture** and h
 - CRM
 - CMS
 - PostgreSQL
-- MinIO
+- RustFS
 - NATS
 - Redis
 
@@ -47,7 +47,7 @@ GraphQL Gateway
    ├── other domain services
    │
    ├── PostgreSQL
-   ├── MinIO
+   ├── RustFS
    ├── NATS
    └── Redis
 ```
@@ -266,14 +266,14 @@ GraphQL connects using restricted database roles.
 
 ---
 
-## GraphQL + MinIO
+## GraphQL + RustFS
 
 GraphQL should **not proxy file uploads**.
 
 Instead:
 
 1. GraphQL generates a **signed upload URL**
-2. client uploads directly to MinIO
+2. client uploads directly to RustFS
 3. GraphQL stores metadata in PostgreSQL
 
 Example:
@@ -285,7 +285,7 @@ Client
 GraphQL → signed URL
    │
    ▼
-Upload to MinIO
+Upload to RustFS
    │
    ▼
 Metadata stored in PostgreSQL
