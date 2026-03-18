@@ -1,4 +1,4 @@
-# Zero Trust Mapping for CRM, CMS, PostgreSQL, MinIO, NATS, and Redis
+# Zero Trust Mapping for CRM, CMS, PostgreSQL, RustFS, NATS, and Redis
 
 ## Zero Trust Principles Used Here
 
@@ -148,10 +148,10 @@ It is a **protected data plane component** that must enforce identity, scope, an
 
 ---
 
-## MinIO
+## RustFS
 
 ### Role in the architecture
-MinIO is the **object storage layer** for binary artifacts such as:
+RustFS is the **object storage layer** for binary artifacts such as:
 - uploads
 - media
 - documents
@@ -160,7 +160,7 @@ MinIO is the **object storage layer** for binary artifacts such as:
 - exports
 
 ### Zero Trust fit
-MinIO should not be treated like a flat shared file bucket accessible to everything.
+RustFS should not be treated like a flat shared file bucket accessible to everything.
 
 Instead:
 - each workload gets scoped access to only the buckets and actions it needs
@@ -193,7 +193,7 @@ Instead:
 
 ### Why it matters
 Object storage can quietly become a giant trust leak.  
-In Zero Trust, MinIO becomes a **policy-scoped artifact store**, not a universal shared drive.
+In Zero Trust, RustFS becomes a **policy-scoped artifact store**, not a universal shared drive.
 
 ---
 
@@ -288,7 +288,7 @@ All six components should rely on a central identity system for:
 Each component should enforce its own authorization boundary:
 - CRM and CMS at business/domain level
 - PostgreSQL at data role and row level
-- MinIO at bucket/object policy level
+- RustFS at bucket/object policy level
 - NATS at subject/stream level
 - Redis at ACL/keyspace/command level
 
@@ -324,7 +324,7 @@ So each component should emit logs and audit signals into a central monitoring/s
 | CRM | Business domain with strong user and object-level authorization |
 | CMS | Controlled publishing domain with workflow and content access policies |
 | PostgreSQL | Protected structured data plane with per-service least privilege |
-| MinIO | Policy-scoped object store with strict bucket/object access control |
+| RustFS | Policy-scoped object store with strict bucket/object access control |
 | NATS | Verified event fabric with subject-level publish/subscribe controls |
 | Redis | Restricted ephemeral state layer with strong client ACL boundaries |
 
@@ -336,7 +336,7 @@ In a Zero Trust platform:
 
 - **CRM** and **CMS** are not trusted apps; they are policy-enforced domains
 - **PostgreSQL** is not a shared trusted database; it is a protected data service
-- **MinIO** is not a shared drive; it is a controlled artifact plane
+- **RustFS** is not a shared drive; it is a controlled artifact plane
 - **NATS** is not an open internal bus; it is an authenticated event fabric
 - **Redis** is not a generic internal cache; it is a tightly scoped runtime state service
 
