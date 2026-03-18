@@ -19,16 +19,14 @@ subgraph "Infrastructure"
   K8S["Kubernetes / Multi-Cloud Platform"]
 end
 
-%% Zero trust: applications go via Zitadel
+%% Keep minimal relations
 G --> Z
 CMS --> Z
 
-%% Applications use infrastructure services
 G --> PG
-G --> NATS
 CMS --> PG
+G --> NATS
 
-%% Infra services run on platform
 PG --> K8S
 NATS --> K8S
 RFS --> K8S
