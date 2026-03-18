@@ -41,11 +41,7 @@ flowchart TB
 %% INFRASTRUCTURE (BOTTOM)
 %% =====================
     subgraph PLATFORM["Kubernetes / Multi-Cloud Platform"]
-        K1[NATS]
-        K2[PostgreSQL]
-        K3[RustFS]
-        K4[Observability]
-        K5[GitOps]
+        K["Compute / Networking / Storage"]
     end
 
 %% =====================
@@ -78,7 +74,7 @@ flowchart TB
     Z --> G
     F --> G
 
-    %% Platform foundation
-    PLATFORM --- P
-    PLATFORM --- N
-    PLATFORM --- RFS
+    %% Infrastructure (strict bottom)
+    P --> PLATFORM
+    RFS --> PLATFORM
+    N --> PLATFORM
