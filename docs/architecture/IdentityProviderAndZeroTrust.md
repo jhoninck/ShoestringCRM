@@ -43,7 +43,7 @@ GraphQL API / Gateway
    ├── CRM
    ├── CMS
    ├── PostgreSQL
-   ├── MinIO
+   ├── RustFS
    ├── NATS
    └── Redis
 ```
