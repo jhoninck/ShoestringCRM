@@ -1,8 +1,11 @@
+
+If GitHub still renders it too vertically, use this safer version with no `direction LR` inside subgraphs:
+
+```md
 ```mermaid
 flowchart TB
 
 subgraph APP_SVC["Application Services"]
-direction LR
   FL["Flutter"]
   HF["Hasura Federation"]
   MAIL["Mail<br/>IMAP / SMTP"]
@@ -11,14 +14,12 @@ direction LR
 end
 
 subgraph APP["Applications"]
-direction LR
   Z["Zitadel (OIDC)"]
   G["Rust GraphQL API"]
   CMS["Hygraph / CMS"]
 end
 
 subgraph INF_SVC["Infrastructure Services"]
-direction LR
   PG["PostgreSQL"]
   NATS["NATS Event Bus"]
   RFS["RustFS"]
@@ -27,7 +28,6 @@ direction LR
 end
 
 subgraph INF["Infrastructure"]
-direction LR
   K8S["Kubernetes / Multi-Cloud Platform"]
 end
 
