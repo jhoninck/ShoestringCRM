@@ -1,4 +1,3 @@
-```markdown
 ```mermaid
 flowchart TB
     Z[Zitadel<br/>OIDC]
