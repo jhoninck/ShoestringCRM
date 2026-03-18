@@ -1,13 +1,15 @@
 ```mermaid
 flowchart TB
 
-%% Infrastructure (bottom)
-subgraph INF["Infrastructure"]
-  K8S["Kubernetes / Multi-Cloud Platform"]
+subgraph APP["Applications"]
+direction LR
+  Z["Zitadel (OIDC)"]
+  G["Rust GraphQL API"]
+  CMS["Hygraph / CMS"]
 end
 
-%% Infrastructure Services (above infra)
 subgraph INF_SVC["Infrastructure Services"]
+direction LR
   PG["PostgreSQL"]
   NATS["NATS Event Bus"]
   RFS["RustFS"]
@@ -15,13 +17,10 @@ subgraph INF_SVC["Infrastructure Services"]
   GITOPS["GitOps"]
 end
 
-%% Applications (top)
-subgraph APP["Applications"]
-  Z["Zitadel (OIDC)"]
-  G["Rust GraphQL API"]
-  CMS["Hygraph / CMS"]
+subgraph INF["Infrastructure"]
+direction LR
+  K8S["Kubernetes / Multi-Cloud Platform"]
 end
 
-%% Force vertical layering
-INF_SVC --> INF
 APP --> INF_SVC
+INF_SVC --> INF
