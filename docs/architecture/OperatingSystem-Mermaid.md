@@ -1,77 +1,72 @@
 ```mermaid
-flowchart TB
+flowchart BT
 
-%% =====================
-%% BUSINESS (TOP)
-%% =====================
-subgraph BUSINESS["Business"]
-    FUNNEL["Sales Funnel<br/>Sales → Opportunities → Customers"]
-end
+    %% =====================
+    %% INFRASTRUCTURE BASE
+    %% =====================
+    subgraph PLATFORM["Kubernetes / Multi-Cloud Platform"]
+        P["PostgreSQL"]
+        N["NATS Event Bus"]
+        RFS["RustFS"]
+        OBS["Observability"]
+        GO["GitOps"]
+    end
 
-%% =====================
-%% AI / DOMAIN
-%% =====================
-subgraph AI_DOMAIN["AI / Domain"]
-    AI["AI Assistant<br/>Ollama + Guardrails"]
-    RAG["RAG / Retrieval<br/>Policies / Redaction / Embeddings"]
-end
-
-%% =====================
-%% APPLICATION / SERVICES
-%% =====================
-subgraph SERVICES["Application / Services"]
+    %% =====================
+    %% SOFTWARE / SERVICES
+    %% =====================
     Z["Zitadel (OIDC)"]
     F["Flutter"]
     G["Rust GraphQL API"]
     H["Hasura Federation"]
     CMS["Hygraph / CMS"]
     CC["Communication Channels<br/>Mail / VoIP / Social Media"]
-end
 
-%% =====================
-%% INFRASTRUCTURE (LOWEST)
-%% =====================
-subgraph PLATFORM["Kubernetes / Multi-Cloud Platform"]
-    P["PostgreSQL"]
-    RFS["RustFS"]
-    N["NATS Event Bus"]
-    OBS["Observability"]
-    GO["GitOps"]
-end
+    %% =====================
+    %% AI / DOMAIN
+    %% =====================
+    AI["AI Assistant<br/>Ollama + Guardrails"]
+    RAG["RAG / Retrieval<br/>Policies / Redaction / Embeddings"]
 
-%% =====================
-%% FLOW
-%% =====================
+    %% =====================
+    %% BUSINESS
+    %% =====================
+    FUNNEL["Sales Funnel<br/>Sales → Opportunities → Customers"]
 
-%% Business -> AI
-FUNNEL --> AI
-AI --> RAG
+    %% =====================
+    %% FLOWS
+    %% =====================
 
-%% AI / services
-AI --> G
-RAG --> G
+    PLATFORM --> Z
+    PLATFORM --> F
+    PLATFORM --> G
+    PLATFORM --> H
+    PLATFORM --> CMS
+    PLATFORM --> CC
+    PLATFORM --> AI
+    PLATFORM --> RAG
 
-%% Clients / identity
-Z --> G
-F --> G
+    Z --> G
+    F --> G
+    G --> H
+    G --> CMS
 
-%% Service composition
-G --> H
-G --> CMS
+    CC --> N
+    H --> P
+    AI --> P
+    AI --> RFS
+    N --> AI
+    AI --> RAG
 
-%% Event / storage
-CC --> N
-H --> P
-AI --> P
-AI --> RFS
-N --> AI
+    G --> FUNNEL
+    AI --> FUNNEL
+    RAG --> FUNNEL
+    CC --> FUNNEL
 
-%% Ops / platform relations
-GO -. deploys .-> G
-GO -. deploys .-> H
-GO -. deploys .-> AI
-
-OBS -. monitors .-> G
-OBS -. monitors .-> P
-OBS -. monitors .-> N
-OBS -. monitors .-> RFS
+    GO -. deploys .-> G
+    GO -. deploys .-> H
+    GO -. deploys .-> AI
+    OBS -. monitors .-> G
+    OBS -. monitors .-> P
+    OBS -. monitors .-> N
+    OBS -. monitors .-> RFS
