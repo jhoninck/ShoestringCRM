@@ -13,7 +13,7 @@ flowchart TB
     RAG["RAG / Retrieval<br/>Policies / Redaction / Embeddings"]
 
 %% =====================
-%% SERVICES (MIDDLE)
+%% SERVICES
 %% =====================
     G["Rust GraphQL API"]
     H["Hasura Federation"]
@@ -27,7 +27,7 @@ flowchart TB
     N["NATS Event Bus"]
 
 %% =====================
-%% CHANNELS / INPUT
+%% CHANNELS
 %% =====================
     CC["Communication Channels<br/>Mail / VoIP / Social Media"]
 
@@ -49,34 +49,36 @@ flowchart TB
     end
 
 %% =====================
-%% FLOWS
+%% FLOWS (TOP → DOWN)
 %% =====================
 
-    %% Client / Auth
+    %% Business → AI
+    FUNNEL --> AI
+    AI --> RAG
+
+    %% AI → Services
+    AI --> G
+    RAG --> G
+
+    %% Services
+    G --> H
+    G --> CMS
+
+    %% Services → Data
+    H --> P
+
+    %% Data / Events
+    P --> RFS
+    RFS --> N
+
+    %% Channels → Events
+    CC --> N
+
+    %% Clients
     Z --> G
     F --> G
 
-    %% Core services
-    G --> H
-    G --> CMS
-    H --> P
-
-    %% Data + events
-    P --> AI
-    P --> RFS
-    RFS --> N
-    CC --> N
-
-    %% AI
-    N --> AI
-    AI --> RAG
-
-    %% Business flow
-    N --> FUNNEL
-    CC --> FUNNEL
-    RAG --> FUNNEL
-
-    %% Platform
+    %% Platform foundation
     PLATFORM --- P
     PLATFORM --- N
     PLATFORM --- RFS
