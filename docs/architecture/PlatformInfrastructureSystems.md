@@ -1,6 +1,6 @@
 ## Platform Systems
 
-| Subsystem | PostgreSQL | MinIO | NATS | Redis | Purpose |
+| Subsystem | PostgreSQL | RustFS | NATS | Redis | Purpose |
 |---|---|---|---|---|---|
 | Identity / Access Management | ✅ | ⚪ | ✅ | ✅ | PostgreSQL for users and roles. NATS for audit events. Redis for session/token caching. |
 | SSO / OIDC Provider | ✅ | ⚪ | ✅ | ✅ | PostgreSQL for auth metadata. NATS for login events. Redis for session/token storage. |
@@ -9,11 +9,11 @@
 | Workflow / Automation Engine | ✅ | ⚪ | ✅ | ⚪ | PostgreSQL for workflow definitions/state. NATS for triggers. |
 | Scheduler / Job System | ✅ | ⚪ | ✅ | ✅ | PostgreSQL for job metadata. NATS for distributed execution. Redis for locks/ephemeral state. |
 | Webhooks / Integration Layer | ✅ | ⚪ | ✅ | ✅ | PostgreSQL for webhook registry. NATS for event fan-out. Redis for retry scheduling. |
-| Import / Export Service | ✅ | ✅ | ✅ | ✅ | PostgreSQL for job metadata. MinIO for source/export files. NATS for pipeline orchestration. Redis for progress state. |
-| Reporting / BI Exports | ✅ | ✅ | ✅ | ⚪ | PostgreSQL for reports. MinIO for generated exports. NATS for generation triggers. |
-| Backup / Archive Catalog | ✅ | ✅ | ✅ | ⚪ | PostgreSQL for backup metadata. MinIO for archives. NATS for backup events. |
-| IoT / Device Registry | ✅ | ✅ | ✅ | ✅ | PostgreSQL for device registry. MinIO for firmware. NATS for telemetry. Redis for device state cache. |
-| Geospatial / Location Services | ✅ | ✅ | ✅ | ✅ | PostgreSQL for geospatial queries. MinIO for geodata. NATS for location events. Redis for proximity cache. |
+| Import / Export Service | ✅ | ✅ | ✅ | ✅ | PostgreSQL for job metadata. RustFS for source/export files. NATS for pipeline orchestration. Redis for progress state. |
+| Reporting / BI Exports | ✅ | ✅ | ✅ | ⚪ | PostgreSQL for reports. RustFS for generated exports. NATS for generation triggers. |
+| Backup / Archive Catalog | ✅ | ✅ | ✅ | ⚪ | PostgreSQL for backup metadata. RustFS for archives. NATS for backup events. |
+| IoT / Device Registry | ✅ | ✅ | ✅ | ✅ | PostgreSQL for device registry. RustFS for firmware. NATS for telemetry. Redis for device state cache. |
+| Geospatial / Location Services | ✅ | ✅ | ✅ | ✅ | PostgreSQL for geospatial queries. RustFS for geodata. NATS for location events. Redis for proximity cache. |
 
 Legend:
 
