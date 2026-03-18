@@ -34,13 +34,3 @@ end
 APP_SVC --> APP
 APP --> INF_SVC
 INF_SVC --> INF
-
-linkStyle 0 stroke-width:0px;
-linkStyle 1 stroke-width:0px;
-linkStyle 2 stroke-width:0px;
-linkStyle 3 stroke-width:0px;
-linkStyle 4 stroke-width:0px;
-linkStyle 5 stroke-width:0px;
-linkStyle 6 stroke-width:0px;
-linkStyle 7 stroke-width:0px;
-linkStyle 8 stroke-width:0px;
