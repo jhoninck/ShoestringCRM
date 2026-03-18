@@ -1,6 +1,6 @@
 ## CRM Systems
 
-| Subsystem | PostgreSQL | MinIO | NATS | Redis | Purpose |
+| Subsystem | PostgreSQL | RustFS | NATS | Redis | Purpose |
 |---|---|---|---|---|---|
 | CRM Contacts | ✅ | ⚪ | ✅ | ✅ | PostgreSQL for contact records and relationships. NATS for updates/events. Redis for lookup cache. |
 | CRM Accounts / Organizations | ✅ | ⚪ | ✅ | ⚪ | PostgreSQL for company hierarchy and metadata. NATS for lifecycle events. |
