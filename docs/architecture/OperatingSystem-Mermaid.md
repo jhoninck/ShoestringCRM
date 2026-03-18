@@ -1,24 +1,45 @@
 ```mermaid
 flowchart TB
-    Z[Zitadel<br/>OIDC]
-    F[Flutter]
 
-    G[Rust GraphQL API]
-    H[Hasura Federation]
-    P[PostgreSQL]
-    RFS[RustFS]
-    N[NATS Event Bus]
+%% =====================
+%% BUSINESS (TOP)
+%% =====================
+    FUNNEL["Sales Funnel<br/>Sales → Opportunities → Customers"]
 
-    CMS[Hygraph / CMS]
-
-    CC["Communication Channels<br/>Mail / VoIP / Social Media"]
-
-    AI[AI Assistant<br/>Ollama + Guardrails]
+%% =====================
+%% AI / DOMAIN
+%% =====================
+    AI["AI Assistant<br/>Ollama + Guardrails"]
     RAG["RAG / Retrieval<br/>Policies / Redaction / Embeddings"]
 
-    SF[Sales Funnel]
-    FUNNEL["Sales<br/>Opportunities<br/>Customers"]
+%% =====================
+%% SERVICES (MIDDLE)
+%% =====================
+    G["Rust GraphQL API"]
+    H["Hasura Federation"]
+    CMS["Hygraph / CMS"]
 
+%% =====================
+%% DATA / EVENT LAYER
+%% =====================
+    P["PostgreSQL"]
+    RFS["RustFS"]
+    N["NATS Event Bus"]
+
+%% =====================
+%% CHANNELS / INPUT
+%% =====================
+    CC["Communication Channels<br/>Mail / VoIP / Social Media"]
+
+%% =====================
+%% CLIENT + IDENTITY
+%% =====================
+    Z["Zitadel (OIDC)"]
+    F["Flutter"]
+
+%% =====================
+%% INFRASTRUCTURE (BOTTOM)
+%% =====================
     subgraph PLATFORM["Kubernetes / Multi-Cloud Platform"]
         K1[NATS]
         K2[PostgreSQL]
@@ -27,20 +48,35 @@ flowchart TB
         K5[GitOps]
     end
 
-    Z --> G
-    F --> H
-    G --> H
-    H --> P
-    G --> CMS
+%% =====================
+%% FLOWS
+%% =====================
 
+    %% Client / Auth
+    Z --> G
+    F --> G
+
+    %% Core services
+    G --> H
+    G --> CMS
+    H --> P
+
+    %% Data + events
     P --> AI
     P --> RFS
+    RFS --> N
     CC --> N
-    RFS -.-> N
+
+    %% AI
     N --> AI
     AI --> RAG
 
-    N --> SF
-    CC --> SF
-    RAG --> SF
-    SF --> FUNNEL
+    %% Business flow
+    N --> FUNNEL
+    CC --> FUNNEL
+    RAG --> FUNNEL
+
+    %% Platform
+    PLATFORM --- P
+    PLATFORM --- N
+    PLATFORM --- RFS
