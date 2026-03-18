@@ -1,6 +1,6 @@
 ## AI / Data Systems
 
-| Subsystem | PostgreSQL | MinIO | NATS | Redis | Purpose |
+| Subsystem | PostgreSQL | RustFS | NATS | Redis | Purpose |
 |---|---|---|---|---|---|
 | AI Inference Gateway | ✅ | ✅ | ✅ | ✅ | PostgreSQL for model registry and usage logs. MinIO for models. NATS for async inference tasks. Redis for prompt caching. |
 | AI Training Pipeline | ✅ | ✅ | ✅ | ✅ | PostgreSQL for experiment metadata. MinIO for datasets/models. NATS for training pipeline orchestration. Redis for job coordination. |
