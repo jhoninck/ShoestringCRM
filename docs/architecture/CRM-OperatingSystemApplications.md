@@ -3,10 +3,6 @@ flowchart TB
 
 subgraph "Applications"
   Z["Zitadel (OIDC)"]
-  F["Flutter"]
-  G["Rust GraphQL API"]
-  H["Hasura Federation"]
-  CMS["Hygraph / CMS"]
 end
 
 subgraph "Infrastructure Services"
@@ -22,9 +18,6 @@ subgraph "Infrastructure"
 end
 
 Z --> PG
-G --> PG
-G --> NATS
-H --> PG
 
 PG --> K8S
 NATS --> K8S
