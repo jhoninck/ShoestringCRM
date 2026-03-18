@@ -4,77 +4,74 @@ flowchart TB
 %% =====================
 %% BUSINESS (TOP)
 %% =====================
+subgraph BUSINESS["Business"]
     FUNNEL["Sales Funnel<br/>Sales → Opportunities → Customers"]
+end
 
 %% =====================
 %% AI / DOMAIN
 %% =====================
+subgraph AI_DOMAIN["AI / Domain"]
     AI["AI Assistant<br/>Ollama + Guardrails"]
     RAG["RAG / Retrieval<br/>Policies / Redaction / Embeddings"]
+end
 
 %% =====================
-%% SERVICES
+%% APPLICATION / SERVICES
 %% =====================
+subgraph SERVICES["Application / Services"]
+    Z["Zitadel (OIDC)"]
+    F["Flutter"]
     G["Rust GraphQL API"]
     H["Hasura Federation"]
     CMS["Hygraph / CMS"]
+    CC["Communication Channels<br/>Mail / VoIP / Social Media"]
+end
 
 %% =====================
-%% DATA / EVENT LAYER
+%% INFRASTRUCTURE (LOWEST)
 %% =====================
+subgraph PLATFORM["Kubernetes / Multi-Cloud Platform"]
     P["PostgreSQL"]
     RFS["RustFS"]
     N["NATS Event Bus"]
+    OBS["Observability"]
+    GO["GitOps"]
+end
 
 %% =====================
-%% CHANNELS
-%% =====================
-    CC["Communication Channels<br/>Mail / VoIP / Social Media"]
-
-%% =====================
-%% CLIENT + IDENTITY
-%% =====================
-    Z["Zitadel (OIDC)"]
-    F["Flutter"]
-
-%% =====================
-%% INFRASTRUCTURE (BOTTOM)
-%% =====================
-    subgraph PLATFORM["Kubernetes / Multi-Cloud Platform"]
-        K["Compute / Networking / Storage"]
-    end
-
-%% =====================
-%% FLOWS (TOP → DOWN)
+%% FLOW
 %% =====================
 
-    %% Business → AI
-    FUNNEL --> AI
-    AI --> RAG
+%% Business -> AI
+FUNNEL --> AI
+AI --> RAG
 
-    %% AI → Services
-    AI --> G
-    RAG --> G
+%% AI / services
+AI --> G
+RAG --> G
 
-    %% Services
-    G --> H
-    G --> CMS
+%% Clients / identity
+Z --> G
+F --> G
 
-    %% Services → Data
-    H --> P
+%% Service composition
+G --> H
+G --> CMS
 
-    %% Data / Events
-    P --> RFS
-    RFS --> N
+%% Event / storage
+CC --> N
+H --> P
+AI --> P
+AI --> RFS
+N --> AI
 
-    %% Channels → Events
-    CC --> N
+%% Ops / platform relations
+GO -. deploys .-> G
+GO -. deploys .-> H
+GO -. deploys .-> AI
 
-    %% Clients
-    Z --> G
-    F --> G
-
-    %% Infrastructure (strict bottom)
-    P --> PLATFORM
-    RFS --> PLATFORM
-    N --> PLATFORM
+OBS -. monitors .-> G
+OBS -. monitors .-> P
+OBS -. monitors .-> N
+OBS -. monitors .-> RFS
