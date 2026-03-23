@@ -33,7 +33,7 @@ end
 %% INFRA SERVICES
 %% =====================
 subgraph INF_SVC["Infrastructure Services"]
-  PG["PostgreSQL"] --- NATS["NATS Event Bus"] --- RFS["RustFS"] --- AIC["AI Compute"] --- OBS["Observability"] --- GITOPS["GitOps"]
+  PG["PostgreSQL"] --- NATS["NATS Event Bus"] --- RFS["RustFS"] --- AICLOUD["AI Compute (Cloud)"] --- AIONPREM["AI Compute (On-Prem GPU)"] --- OBS["Observability"] --- GITOPS["GitOps"]
 end
 
 %% =====================
@@ -51,4 +51,3 @@ BUSINESS --> APP_SVC
 APP_SVC --> APP
 APP --> INF_SVC
 INF_SVC --> INF
-```
