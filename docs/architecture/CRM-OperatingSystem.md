@@ -19,14 +19,14 @@ end
 %% APPLICATION SERVICES
 %% =====================
 subgraph APP_SVC["Application Services"]
-  FL["Flutter"] --- HF["Hasura Federation"] --- MAIL["Mail"] --- VOIP["VoIP"] --- SOCIAL["Social Media"] --- GR["GuardRails"]
+  FL["Flutter"] --- HF["Hasura Federation"] --- MAIL["Mail"] --- VOIP["VoIP"] --- SOCIAL["Social Media"] --- GR["GuardRails"] --- LLM["LLM / AI"]
 end
 
 %% =====================
 %% APPLICATIONS
 %% =====================
 subgraph APP["Applications"]
-  Z["Zitadel (OIDC)"] --- G["Rust GraphQL API"] --- CMS["Hygraph / CMS"] --- LLM["LLM / AI"]
+  Z["Zitadel (OIDC)"] --- G["Rust GraphQL API"] --- CMS["Hygraph / CMS"]
 end
 
 %% =====================
@@ -44,15 +44,10 @@ subgraph INF["Infrastructure"]
 end
 
 %% =====================
-%% LAYER STACKING
+%% LAYER STACKING ONLY
 %% =====================
 BIZ_SVC --> BUSINESS
 BUSINESS --> APP_SVC
 APP_SVC --> APP
 APP --> INF_SVC
 INF_SVC --> INF
-
-%% =====================
-%% ZERO TRUST ENFORCEMENT
-%% =====================
-GR --> Z
